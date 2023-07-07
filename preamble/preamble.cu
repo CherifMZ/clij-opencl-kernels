@@ -946,14 +946,14 @@ __device__ inline void write_buffer1dul(int write_buffer_width, int write_buffer
     buffer_var[pos_in_buffer] = value;
 }
 
-__device__ float readPixel(const float4* imageData, int width, int height, int depth, int4 position)
+__device__ float readPixel(float* imageData, int width, int height, int depth, int4 pos)
 { 
-    int index = position.z * width * height + position.y * width + position.x; 
-    return imageData[index].x;
+    int index = pos.z * width * height + pos.y * width + pos.x; 
+    return imageData[index];
 }
 
-__device__ void writePixel(float4* imageData, int width, int height, int depth, int4 position, const float& pixelValue)
+__device__ void writePixel(float* imageData, int width, int height, int depth, int4 pos, const float& pixelValue)
 { 
-    int index = position.z * width * height + position.y * width + position.x; 
-    imageData[index].x = pixelValue;
+    int index = pos.z * width * height + pos.y * width + pos.x; 
+    imageData[index] = pixelValue;
 }
