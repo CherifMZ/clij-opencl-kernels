@@ -952,7 +952,7 @@ __device__ float readPixel(float* imageData, int width, int height, int depth, i
     return imageData[index];
 }
 
-__device__ void writePixel(float* imageData, int width, int height, int depth, int4 pos, const float& pixelValue)
+__device__ void writePixel(float* imageData, int width, int height, int depth, int4 pos, const float pixelValue)
 { 
     int index = pos.z * width * height + pos.y * width + pos.x; 
     imageData[index] = pixelValue;
