@@ -169,6 +169,18 @@ __device__ inline float clij_convert_float_sat(float value) {
 #define CLK_FILTER_LINEAR 32
 #define CLK_ADDRESS_NONE 64
 
+__device__ float readPixel(const float4* imageData, int width, int height, int depth, int4 position)
+{ 
+    int index = position.z * width * height + position.y * width + position.x; 
+    return imageData[index].x;
+}
+
+__device__ void writePixel(float4* imageData, int width, int height, int depth, int4 position, const float& pixelValue)
+{ 
+    int index = position.z * width * height + position.y * width + position.x; 
+    imageData[index].x = pixelValue;
+}
+
 __device__ inline float2 read_buffer3df(int read_buffer_width, int read_buffer_height, int read_buffer_depth, float * buffer_var, int sampler, int4 position )
 {
     int4 pos = make_int4(position.x, position.y, position.z, 0);
