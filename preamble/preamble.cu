@@ -946,8 +946,9 @@ __device__ inline void write_buffer1dul(int write_buffer_width, int write_buffer
     buffer_var[pos_in_buffer] = value;
 }
 
-__device__ inline float2 readPixel(float* imageData, int width, int height, int depth, int4 pos)
+__device__ inline float2 readPixel(float* imageData, int width, int height, int depth, int4 position)
 { 
+    int4 pos = make_int4(position.x, position.y, position.z, 0);
     int index = pos.z * width * height + pos.y * width + pos.x; 
     return make_float2(imageData[index],0);
 }
